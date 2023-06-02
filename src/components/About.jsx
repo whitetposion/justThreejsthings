@@ -1,13 +1,23 @@
-import React from 'react'
-import Tilt from 'react-parallax-tilt'
-import {motion} from 'framer-motion'
+import React from 'react';
+import Tilt from 'react-parallax-tilt';
+import {motion} from 'framer-motion';
 
-import  {styles} from "../styles"
-import {services } from "../constants"
-import {fadeIn , textVariant } from "../utils/motion"
+import  {styles} from "../styles";
+import { services } from "../constants/index";
+import {fadeIn , textVariant } from "../utils/motion";
 const ServiceCard = ({index , title , icon })=> {
   return (
-    <p>{title}</p>
+    <Tilt className = "xs:w-[250px] w-full">
+      <motion.div variants = {fadeIn( "right","spring", 0.5*index, 0.75)}
+      className = "w-full green-pink-gradient p-[1px] rounded-[20px] shadow-card ">
+        <div options = {{
+          max:45, scale:1, speed:450
+        }} className = "bg-tertiary rounded-[20px] py-5 px-12 min-h-[280px] flex justify-evenly items-center flex-col ">
+          <img src= {icon} alt={title} className= "w-16 h-16 object-contain" />
+          <h3 className = "text-white text-[20px] font-bold text-center"> {title}</h3>
+        </div>
+      </motion.div>
+    </Tilt>
   )
 }
 const About = () => {
@@ -23,10 +33,10 @@ const About = () => {
       I have always been fascinated by the ever-evolving world of technology and its impact on our daily lives. Through my education and practical experience, I have developed a strong foundation in web development, including proficiency in HTML, CSS, JavaScript, and various frameworks. I have also gained hands-on experience in building responsive and user-friendly websites.
       </motion.p>
 
-      <div className="mt-20 flex flex flex-wrap gap=10">
-        {services.map((service, index) =>{
-          <ServiceCard key={service.title} index={index}{...service}/>
-        })}
+      <div className="mt-20 flex flex flex-wrap gap-10">
+        {services.map((service, index) =>(
+          <ServiceCard key={service.title} index={index} {...service}/>
+        ))}
       </div>
     </>
   )
